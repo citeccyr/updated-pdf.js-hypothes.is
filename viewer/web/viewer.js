@@ -5942,6 +5942,13 @@ var pdfjsWebLibs;
     setTitleUsingUrl: function pdfViewSetTitleUsingUrl(url) {
      this.url = url;
      this.baseUrl = url.split('#')[0];
+
+     // Add `<link rel='canonical' />` with file URL
+     var rel_canonical = document.createElement('link');
+     rel_canonical.href = url;
+     rel_canonical.rel = "canonical";
+     document.head.appendChild(rel_canonical);
+
      try {
       this.setTitle(decodeURIComponent(pdfjsLib.getFilenameFromUrl(url)) || url);
      } catch (e) {
